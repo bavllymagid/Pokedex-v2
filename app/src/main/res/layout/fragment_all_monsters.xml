@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".presentation.ui.fragments.AllMonstersFragment">
 
+    <ImageView
+        android:layout_width="368dp"
+        android:layout_height="352dp"
+        android:layout_marginStart="128dp"
+        android:backgroundTint="@color/black"
+        android:src="@drawable/pokeball_background"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="-63dp" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
         android:layout_width="match_parent"
@@ -28,9 +37,11 @@
         android:id="@+id/monster_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar2"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintVertical_bias="1.0"
         app:spanCount="2"
-        tools:listitem="@layout/monster_item"/>
+        tools:layout_editor_absoluteX="28dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@ import com.bvm.pokedex.presentation.ui.adapters.AllMonstersAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AllMonstersFragment : Fragment() {
+class AllMonstersFragment : Fragment() , AllMonstersAdapter.OnMonsterSelected {
 
     private lateinit var binding: FragmentAllMonstersBinding
     private lateinit var adapter: AllMonstersAdapter
@@ -21,7 +21,7 @@ class AllMonstersFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentAllMonstersBinding.inflate(layoutInflater)
-        adapter = AllMonstersAdapter()
+        adapter = context?.let { it.applicationContext?.let { it1 -> AllMonstersAdapter(it1,this) } }!!
 
         val list = arguments?.getParcelableArrayList<MonsterDetailsModel>("Monsters")
 
@@ -30,5 +30,9 @@ class AllMonstersFragment : Fragment() {
         binding.monsterList.adapter = adapter
 
         return binding.root
+    }
+
+    override fun onMonsterClicked(item: MonsterDetailsModel) {
+        println("Clicked ${item.name}")
     }
 }

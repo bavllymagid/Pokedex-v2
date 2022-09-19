@@ -12,6 +12,7 @@ object ImageLoader {
             .load(url)
             .placeholder(R.drawable.poke)
             .error(R.drawable.poke)
+            .apply(RequestOptions().override(300, 300))
             .into(view)
     }
 }

@@ -6,12 +6,13 @@
 
     <TextView
         android:id="@+id/monster_type"
-        android:layout_width="70dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@drawable/item_background"
-        android:padding="10dp"
-        android:text="Monster Type"
+        android:padding="5dp"
+        android:minWidth="50dp"
+        android:text="@string/monster_type"
         android:textAlignment="center"
         android:textColor="@color/off_white"
         app:layout_constraintBottom_toBottomOf="parent"

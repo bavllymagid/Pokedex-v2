@@ -2,4 +2,7 @@
     <string name="app_name">Pokedex</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="monster_name">Monster Name</string>
+    <string name="monster_image">Monster Image</string>
+    <string name="monster_type">Monster Type</string>
 </resources>

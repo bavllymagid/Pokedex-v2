@@ -4,7 +4,8 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Species(
-    val name: String,
-    val url: String
-):Parcelable
+data class Ability(
+    val ability: AbilityX,
+    val is_hidden: Boolean,
+    val slot: Int
+): Parcelable

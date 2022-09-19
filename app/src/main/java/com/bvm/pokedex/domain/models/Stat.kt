@@ -4,7 +4,8 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Species(
-    val name: String,
-    val url: String
+data class Stat(
+    val base_stat: Int,
+    val effort: Int,
+    val stat: StatX
 ):Parcelable

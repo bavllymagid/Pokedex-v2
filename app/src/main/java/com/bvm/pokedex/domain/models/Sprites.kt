@@ -1,5 +1,10 @@
 package com.bvm.pokedex.domain.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+
+@Parcelize
 data class Sprites(
     val back_default: String,
     val back_female: String,
@@ -9,4 +14,5 @@ data class Sprites(
     val front_female: String,
     val front_shiny: String,
     val front_shiny_female: String,
-)
+    val other: Other,
+):Parcelable

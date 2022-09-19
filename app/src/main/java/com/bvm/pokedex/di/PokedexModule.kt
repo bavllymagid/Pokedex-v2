@@ -2,6 +2,10 @@ package com.bvm.pokedex.di
 
 import android.content.Context
 import com.bvm.pokedex.data.remote.PokedexApi
+import com.bvm.pokedex.data.remote.RemoteDataSource
+import com.bvm.pokedex.data.remote.RemoteDataSourceImpl
+import com.bvm.pokedex.data.repository.PokedexRepositoryImpl
+import com.bvm.pokedex.domain.repository.PokedexRepository
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import dagger.Module
@@ -37,5 +41,15 @@ class PokedexModule {
                     .build()
             )
             .build()
+
+    @Singleton
+    @Provides
+    fun provideRemoteDataSource(api:PokedexApi):RemoteDataSource =
+        RemoteDataSourceImpl(api)
+
+    @Singleton
+    @Provides
+    fun provideRepository(remoteDataSource: RemoteDataSource):PokedexRepository =
+        PokedexRepositoryImpl(remoteDataSource)
 
 }

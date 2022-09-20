@@ -13,6 +13,7 @@ import com.bvm.pokedex.domain.models.MonsterDetailsModel
 import com.bvm.pokedex.domain.models.Pokemon
 import com.bvm.pokedex.domain.models.RequestPaginate
 import com.bvm.pokedex.presentation.viewmodels.PokedexViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -48,6 +49,9 @@ class StartUpFragment : Fragment() {
                 }
             } catch (e: Exception) {
                 e.toString()
+                withContext(Dispatchers.Main){
+                    Snackbar.make(requireView(), "Something went Wrong", Snackbar.LENGTH_SHORT).show()
+                }
             }
         }
     }

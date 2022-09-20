@@ -13,6 +13,7 @@ import com.bvm.pokedex.presentation.ui.adapters.AllMonstersAdapter
 import com.bvm.pokedex.presentation.viewmodels.PokedexViewModel
 import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -94,6 +95,10 @@ class AllMonstersFragment : Fragment() , AllMonstersAdapter.OnMonsterSelected {
                 }
             } catch (e: Exception) {
                 e.toString()
+                withContext(Dispatchers.Main){
+                    Snackbar.make(requireView(), "Something went Wrong", Snackbar.LENGTH_SHORT).show()
+                    binding.monsterProgress.visibility = View.GONE
+                }
             }
         }
     }

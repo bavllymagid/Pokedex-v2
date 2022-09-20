@@ -68,11 +68,15 @@ class AllMonstersAdapter(val context: Context , val onMonsterSelected: OnMonster
 
     @SuppressLint("ResourceAsColor")
     private fun colorizeView(view: MaterialCardView, item:MonsterDetailsModel){
-        when (item.types[0].type.name) {
+        when (item.types[0].type.name.lowercase()) {
             "fire" -> view.setCardBackgroundColor(getColor(context, R.color.red))
             "grass" -> view.setCardBackgroundColor(getColor(context, R.color.light_green))
             "bug" -> view.setCardBackgroundColor(getColor(context, R.color.brown))
+            "ground" -> view.setCardBackgroundColor(getColor(context, R.color.brown))
             "water" -> view.setCardBackgroundColor(getColor(context, R.color.cyan))
+            "electric" -> view.setCardBackgroundColor(getColor(context, R.color.orange))
+            "fairy" -> view.setCardBackgroundColor(getColor(context, R.color.pink))
+            "poison" -> view.setCardBackgroundColor(getColor(context, R.color.purple))
             else -> view.setCardBackgroundColor(getColor(context, R.color.grey))
         }
     }

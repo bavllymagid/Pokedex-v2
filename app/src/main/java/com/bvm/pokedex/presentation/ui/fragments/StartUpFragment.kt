@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.bvm.pokedex.R
 import com.bvm.pokedex.databinding.FragmentStartUpBinding
 import com.bvm.pokedex.domain.models.MonsterDetailsModel
+import com.bvm.pokedex.domain.models.Pokemon
+import com.bvm.pokedex.domain.models.RequestPaginate
 import com.bvm.pokedex.presentation.viewmodels.PokedexViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -40,13 +42,9 @@ class StartUpFragment : Fragment() {
     private fun getAllPokemon() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = pokemonViewModel.getAllPokemon(0, 20)
-                val list = ArrayList<MonsterDetailsModel>()
-                for (item in response?.results ?: ArrayList()) {
-                    pokemonViewModel.getPokemonByName(item.name)?.let { list.add(it) }
-                }
+                pokemonViewModel.getAllPokemon(RequestPaginate.offset, RequestPaginate.limit)
                 withContext(Dispatchers.Main) {
-                    transferTo(AllMonstersFragment(), list)
+                    transferTo(AllMonstersFragment())
                 }
             } catch (e: Exception) {
                 e.toString()
@@ -54,10 +52,7 @@ class StartUpFragment : Fragment() {
         }
     }
 
-    private fun transferTo(fragment: Fragment, item: ArrayList<MonsterDetailsModel>) {
-        val bundle = Bundle()
-        bundle.putParcelableArrayList("Monsters", item)
-        fragment.arguments = bundle
+    private fun transferTo(fragment: Fragment) {
         requireActivity().supportFragmentManager.commit {
             replace(R.id.nav_container, fragment)
         }

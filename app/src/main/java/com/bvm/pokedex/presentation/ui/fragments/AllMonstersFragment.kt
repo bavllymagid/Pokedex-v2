@@ -56,7 +56,6 @@ class AllMonstersFragment : Fragment() , AllMonstersAdapter.OnMonsterSelected {
 
         binding.refresh.setOnRefreshListener {
             getAllPokemon(0)
-            binding.refresh.isRefreshing = false
         }
 
         return binding.root
@@ -88,16 +87,18 @@ class AllMonstersFragment : Fragment() , AllMonstersAdapter.OnMonsterSelected {
                         1 -> adapter.submitList(adapter.currentList + list)
                         else -> adapter.submitList(list)
                     }
-                    mShimmerViewContainer.startShimmer();
+                    mShimmerViewContainer.startShimmer()
                     binding.dataHolder.visibility = View.VISIBLE
                     binding.shimmerViewContainer.visibility = View.GONE
                     binding.monsterProgress.visibility = View.GONE
+                    binding.refresh.isRefreshing = false
                 }
             } catch (e: Exception) {
                 e.toString()
                 withContext(Dispatchers.Main){
                     Snackbar.make(requireView(), "Something went Wrong", Snackbar.LENGTH_SHORT).show()
                     binding.monsterProgress.visibility = View.GONE
+                    binding.refresh.isRefreshing = false
                 }
             }
         }

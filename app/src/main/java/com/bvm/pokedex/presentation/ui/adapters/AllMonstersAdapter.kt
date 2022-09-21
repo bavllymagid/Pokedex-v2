@@ -16,6 +16,8 @@ import com.bvm.pokedex.domain.models.Type
 import com.bvm.pokedex.utils.AllMonstersDiffUtils
 import com.bvm.pokedex.utils.ImageLoader
 import com.google.android.material.card.MaterialCardView
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class AllMonstersAdapter(val context: Context, private val onMonsterSelected: OnMonsterSelected) : ListAdapter<MonsterDetailsModel, AllMonstersAdapter.MonsterViewHolder>(AllMonstersDiffUtils()){
@@ -38,7 +40,11 @@ class AllMonstersAdapter(val context: Context, private val onMonsterSelected: On
         val item = getItem(position)
         adapter = MonsterTypeAdapter(typeListOfMonster(item.types),0)
         holder.binding.apply {
-            monsterName.text = item.name
+            monsterName.text = item.name.replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(
+                    Locale.ROOT
+                ) else it.toString()
+            }
             ImageLoader.loadImageIntoImageView(item.sprites.other.officialArtwork.front_default,monsterImg)
             val colorMatrix = ColorMatrix()
             colorMatrix.setSaturation(1.7f)
@@ -49,7 +55,7 @@ class AllMonstersAdapter(val context: Context, private val onMonsterSelected: On
         }
 
         holder.itemView.findViewById<MaterialCardView>(R.id.monster_card).setOnClickListener{
-            onMonsterSelected.onMonsterClicked(item)
+            onMonsterSelected.onMonsterClicked(item,holder.adapterPosition)
         }
     }
 
@@ -80,6 +86,6 @@ class AllMonstersAdapter(val context: Context, private val onMonsterSelected: On
     }
 
     interface OnMonsterSelected {
-        fun onMonsterClicked(item : MonsterDetailsModel)
+        fun onMonsterClicked(item : MonsterDetailsModel,position: Int)
     }
 }

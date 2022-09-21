@@ -27,13 +27,18 @@ class StartUpFragment : Fragment() {
     private lateinit var binding: FragmentStartUpBinding
     private lateinit var pokemonViewModel: PokedexViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentStartUpBinding.inflate(layoutInflater)
         pokemonViewModel = ViewModelProvider(this)[PokedexViewModel::class.java]
-
+        requireActivity().window.statusBarColor = requireActivity().getColor(R.color.off_white)
         getAllPokemon()
 
         return binding.root

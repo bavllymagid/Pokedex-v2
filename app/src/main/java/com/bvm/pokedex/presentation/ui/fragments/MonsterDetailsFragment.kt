@@ -11,11 +11,14 @@ import androidx.fragment.app.commit
 import com.bvm.pokedex.R
 import com.bvm.pokedex.databinding.FragmentMonsterDetailsBinding
 import com.bvm.pokedex.domain.models.MonsterDetailsModel
+import com.bvm.pokedex.domain.models.RequestPaginate
 import com.bvm.pokedex.domain.models.Type
 import com.bvm.pokedex.presentation.ui.adapters.MonsterTypeAdapter
 import com.bvm.pokedex.presentation.ui.adapters.PagerAdapter
 import com.bvm.pokedex.utils.ImageLoader
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class MonsterDetailsFragment : Fragment() {
@@ -30,13 +33,19 @@ class MonsterDetailsFragment : Fragment() {
     ): View {
         binding = FragmentMonsterDetailsBinding.inflate(layoutInflater)
         val monster = arguments?.getParcelable<MonsterDetailsModel>("Monster")
+        requireActivity().window.statusBarColor = requireActivity().getColor(monster?.color!!)
+        requireActivity().window.decorView.systemUiVisibility = 0
 
-        adapter = MonsterTypeAdapter(typeListOfMonster(monster?.types!!), 1)
+        adapter = MonsterTypeAdapter(typeListOfMonster(monster.types), 1)
 
         binding.apply {
             background.setBackgroundColor(ContextCompat.getColor(requireContext(), monster?.color!!))
             ImageLoader.loadImageIntoImageView600(monster.sprites.other.officialArtwork.front_default, monsterImg)
-            monsterName.text = monster.name
+            monsterName.text = monster.name.replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(
+                    Locale.ROOT
+                ) else it.toString()
+            }
             typeRc.adapter = adapter
 //            pager.adapter = pagerAdapter
         }

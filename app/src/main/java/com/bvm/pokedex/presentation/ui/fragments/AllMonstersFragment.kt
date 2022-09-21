@@ -22,6 +22,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
 @AndroidEntryPoint
 class AllMonstersFragment : Fragment() , AllMonstersAdapter.OnMonsterSelected {
 
@@ -37,6 +38,7 @@ class AllMonstersFragment : Fragment() , AllMonstersAdapter.OnMonsterSelected {
         binding = FragmentAllMonstersBinding.inflate(layoutInflater)
         pokemonViewModel = ViewModelProvider(this)[PokedexViewModel::class.java]
         adapter = context?.let { it.applicationContext?.let { it1 -> AllMonstersAdapter(it1,this) } }!!
+        requireActivity().window.statusBarColor = requireActivity().getColor(R.color.off_white)
 
         mShimmerViewContainer = binding.shimmerViewContainer
         val builder = Shimmer.AlphaHighlightBuilder()
@@ -61,7 +63,9 @@ class AllMonstersFragment : Fragment() , AllMonstersAdapter.OnMonsterSelected {
         }
 
         binding.refresh.setOnRefreshListener {
+            currentList.clear()
             getAllPokemon(0)
+            binding.monsterList.scrollToPosition(0)
         }
 
         return binding.root
@@ -70,9 +74,10 @@ class AllMonstersFragment : Fragment() , AllMonstersAdapter.OnMonsterSelected {
     override fun onStart() {
         super.onStart()
         mShimmerViewContainer.startShimmer()
+        requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
     }
 
-    override fun onMonsterClicked(item: MonsterDetailsModel) {
+    override fun onMonsterClicked(item: MonsterDetailsModel , position: Int) {
         val fragment = MonsterDetailsFragment()
         val bundle = Bundle()
         bundle.putParcelable("Monster", item)
@@ -92,6 +97,8 @@ class AllMonstersFragment : Fragment() , AllMonstersAdapter.OnMonsterSelected {
                 for (item in response?.results ?: ArrayList()) {
                     pokemonViewModel.getPokemonByName(item.name)?.let { list.add(it) }
                 }
+                currentList.addAll(list)
+                println("MYAPP ${currentList.size}")
                 withContext(Dispatchers.Main) {
                     when(state){
                         1 -> adapter.submitList(adapter.currentList + list)
@@ -102,8 +109,6 @@ class AllMonstersFragment : Fragment() , AllMonstersAdapter.OnMonsterSelected {
                     binding.shimmerViewContainer.visibility = View.GONE
                     binding.monsterProgress.visibility = View.GONE
                     binding.refresh.isRefreshing = false
-                    currentList.clear()
-                    currentList.addAll(adapter.currentList)
                 }
             } catch (e: Exception) {
                 e.toString()

@@ -2,13 +2,10 @@ package com.bvm.pokedex.presentation.ui.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -21,9 +18,9 @@ import com.bvm.pokedex.utils.ImageLoader
 import com.google.android.material.card.MaterialCardView
 
 
-class AllMonstersAdapter(val context: Context , val onMonsterSelected: OnMonsterSelected) : ListAdapter<MonsterDetailsModel, AllMonstersAdapter.MonsterViewHolder>(AllMonstersDiffUtils()){
+class AllMonstersAdapter(val context: Context, private val onMonsterSelected: OnMonsterSelected) : ListAdapter<MonsterDetailsModel, AllMonstersAdapter.MonsterViewHolder>(AllMonstersDiffUtils()){
 
-    lateinit var adapter:MonsterTypeAdapter
+    private lateinit var adapter:MonsterTypeAdapter
 
     class MonsterViewHolder(val binding: MonsterItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -39,7 +36,7 @@ class AllMonstersAdapter(val context: Context , val onMonsterSelected: OnMonster
 
     override fun onBindViewHolder(holder: MonsterViewHolder, position: Int) {
         val item = getItem(position)
-        adapter = MonsterTypeAdapter(typeListOfMonster(item.types))
+        adapter = MonsterTypeAdapter(typeListOfMonster(item.types),0)
         holder.binding.apply {
             monsterName.text = item.name
             ImageLoader.loadImageIntoImageView(item.sprites.other.officialArtwork.front_default,monsterImg)
@@ -68,17 +65,18 @@ class AllMonstersAdapter(val context: Context , val onMonsterSelected: OnMonster
 
     @SuppressLint("ResourceAsColor")
     private fun colorizeView(view: MaterialCardView, item:MonsterDetailsModel){
-        when (item.types[0].type.name.lowercase()) {
-            "fire" -> view.setCardBackgroundColor(getColor(context, R.color.red))
-            "grass" -> view.setCardBackgroundColor(getColor(context, R.color.light_green))
-            "bug" -> view.setCardBackgroundColor(getColor(context, R.color.brown))
-            "ground" -> view.setCardBackgroundColor(getColor(context, R.color.brown))
-            "water" -> view.setCardBackgroundColor(getColor(context, R.color.cyan))
-            "electric" -> view.setCardBackgroundColor(getColor(context, R.color.orange))
-            "fairy" -> view.setCardBackgroundColor(getColor(context, R.color.pink))
-            "poison" -> view.setCardBackgroundColor(getColor(context, R.color.purple))
-            else -> view.setCardBackgroundColor(getColor(context, R.color.grey))
+        item.color = when (item.types[0].type.name.lowercase()) {
+            "fire" -> R.color.red
+            "grass" -> R.color.light_green
+            "bug" -> R.color.brown
+            "ground" ->  R.color.brown
+            "water" -> R.color.cyan
+            "electric" -> R.color.orange
+            "fairy" -> R.color.pink
+            "poison" -> R.color.purple
+            else -> R.color.grey
         }
+        view.setCardBackgroundColor(getColor(context, item.color))
     }
 
     interface OnMonsterSelected {

@@ -15,4 +15,13 @@ object ImageLoader {
             .apply(RequestOptions().override(300, 300))
             .into(view)
     }
+
+    fun loadImageIntoImageView600(url:String, view: ImageView){
+        Glide.with(PokedexApp.appContext)
+            .load(url)
+            .placeholder(R.drawable.poke)
+            .error(R.drawable.poke)
+            .apply(RequestOptions().override(600, 600))
+            .into(view)
+    }
 }

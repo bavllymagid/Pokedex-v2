@@ -17,5 +17,6 @@ data class MonsterDetailsModel(
     val sprites: Sprites,
     val stats: List<Stat>,
     val types: List<Type>,
-    val weight: Int
+    val weight: Int,
+    var color : Int
 ):Parcelable

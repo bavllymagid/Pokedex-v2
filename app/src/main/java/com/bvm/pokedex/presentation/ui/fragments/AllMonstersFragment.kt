@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
+import com.bvm.pokedex.R
 import com.bvm.pokedex.databinding.FragmentAllMonstersBinding
 import com.bvm.pokedex.domain.models.MonsterDetailsModel
 import com.bvm.pokedex.domain.models.RequestPaginate
 import com.bvm.pokedex.presentation.ui.adapters.AllMonstersAdapter
 import com.bvm.pokedex.presentation.viewmodels.PokedexViewModel
+import com.bvm.pokedex.utils.CurrentList.currentList
 import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.snackbar.Snackbar
@@ -19,8 +22,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-
-
 @AndroidEntryPoint
 class AllMonstersFragment : Fragment() , AllMonstersAdapter.OnMonsterSelected {
 
@@ -42,7 +43,12 @@ class AllMonstersFragment : Fragment() , AllMonstersAdapter.OnMonsterSelected {
         builder.setDirection(Shimmer.Direction.TOP_TO_BOTTOM)
         mShimmerViewContainer.setShimmer(builder.build())
 
-        getAllPokemon(0)
+        if(currentList.isEmpty()) getAllPokemon(0)
+        else{
+            binding.dataHolder.visibility = View.VISIBLE
+            binding.shimmerViewContainer.visibility = View.GONE
+            adapter.submitList(currentList.map { it.copy() })
+        }
 
         binding.monsterList.adapter = adapter
 
@@ -67,7 +73,11 @@ class AllMonstersFragment : Fragment() , AllMonstersAdapter.OnMonsterSelected {
     }
 
     override fun onMonsterClicked(item: MonsterDetailsModel) {
-        println("Clicked ${item.name}")
+        val fragment = MonsterDetailsFragment()
+        val bundle = Bundle()
+        bundle.putParcelable("Monster", item)
+        fragment.arguments = bundle
+        transferTo(fragment)
     }
 
     private fun getAllPokemon(state:Int) {
@@ -92,15 +102,24 @@ class AllMonstersFragment : Fragment() , AllMonstersAdapter.OnMonsterSelected {
                     binding.shimmerViewContainer.visibility = View.GONE
                     binding.monsterProgress.visibility = View.GONE
                     binding.refresh.isRefreshing = false
+                    currentList.clear()
+                    currentList.addAll(adapter.currentList)
                 }
             } catch (e: Exception) {
                 e.toString()
                 withContext(Dispatchers.Main){
-                    Snackbar.make(requireView(), "Something went Wrong", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(requireView(), e.message.toString(), Snackbar.LENGTH_SHORT).show()
                     binding.monsterProgress.visibility = View.GONE
                     binding.refresh.isRefreshing = false
                 }
             }
+        }
+    }
+
+    private fun transferTo(fragment: Fragment) {
+        requireActivity().supportFragmentManager.commit {
+            addToBackStack("frag")
+            replace(R.id.nav_container, fragment)
         }
     }
 }

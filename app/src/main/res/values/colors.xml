@@ -12,5 +12,6 @@
     <color name="brown">#716B45</color>
     <color name="pink">#FFC0CB</color>
     <color name="orange">#FFB000</color>
+    <color name="transparent">#00000000</color>
 
 </resources>

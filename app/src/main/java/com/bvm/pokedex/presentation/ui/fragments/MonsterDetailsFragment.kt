@@ -129,7 +129,12 @@ class MonsterDetailsFragment : Fragment() {
                 }
 
             }catch (e:Exception){
-                Snackbar.make(requireView(), "Something Went Wrong" , Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(requireView(), "Something went Wrong", Snackbar.LENGTH_INDEFINITE)
+                    .setActionTextColor(android.graphics.Color.RED)
+                    .setAction("Refresh") {
+                        getSpeciesDetails(id)
+                    }
+                    .show()
             }
         }
     }

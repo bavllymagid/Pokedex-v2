@@ -1,5 +1,6 @@
 package com.bvm.pokedex.presentation.ui.fragments
 
+import android.app.ProgressDialog.show
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import com.bvm.pokedex.R
 import com.bvm.pokedex.databinding.FragmentStartUpBinding
+import com.bvm.pokedex.domain.models.Color
 import com.bvm.pokedex.domain.models.MonsterDetailsModel
 import com.bvm.pokedex.domain.models.Pokemon
 import com.bvm.pokedex.domain.models.RequestPaginate
@@ -55,7 +57,12 @@ class StartUpFragment : Fragment() {
             } catch (e: Exception) {
                 e.toString()
                 withContext(Dispatchers.Main){
-                    Snackbar.make(requireView(), "Something went Wrong", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(requireView(), "Something went Wrong", Snackbar.LENGTH_INDEFINITE)
+                        .setActionTextColor(android.graphics.Color.RED)
+                        .setAction("Refresh") {
+                            getAllPokemon()
+                        }
+                        .show()
                 }
             }
         }

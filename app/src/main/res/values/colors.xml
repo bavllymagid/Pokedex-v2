@@ -5,6 +5,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="off_white">#F0F2F6</color>
     <color name="grey">#AAB3C7</color>
+    <color name="dark_grey">#7C808C</color>
     <color name="red">#EF5C5B</color>
     <color name="light_green">#41C395</color>
     <color name="green">#53A063</color>
@@ -13,5 +14,6 @@
     <color name="pink">#FFC0CB</color>
     <color name="orange">#FFB000</color>
     <color name="transparent">#00000000</color>
+    <color name="blue">#0000FF</color>
 
 </resources>

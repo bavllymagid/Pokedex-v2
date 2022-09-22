@@ -113,7 +113,7 @@ class AllMonstersFragment : Fragment() , AllMonstersAdapter.OnMonsterSelected {
             } catch (e: Exception) {
                 e.toString()
                 withContext(Dispatchers.Main){
-                    Snackbar.make(requireView(), e.message.toString(), Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(requireView(), "Something Went Wrong", Snackbar.LENGTH_SHORT).show()
                     binding.monsterProgress.visibility = View.GONE
                     binding.refresh.isRefreshing = false
                 }

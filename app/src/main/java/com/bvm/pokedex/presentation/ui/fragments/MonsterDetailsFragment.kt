@@ -31,6 +31,7 @@ class MonsterDetailsFragment : Fragment() {
     private lateinit var binding: FragmentMonsterDetailsBinding
     private lateinit var adapter:MonsterTypeAdapter
     private lateinit var pokemonViewModel: PokedexViewModel
+    private var snackBar: Snackbar? = null
 
     private var monster:MonsterDetailsModel? = null
 
@@ -40,7 +41,7 @@ class MonsterDetailsFragment : Fragment() {
     ): View {
         binding = FragmentMonsterDetailsBinding.inflate(layoutInflater)
         pokemonViewModel = ViewModelProvider(this)[PokedexViewModel::class.java]
-        monster = arguments?.getParcelable<MonsterDetailsModel>("Monster")
+        monster = arguments?.getParcelable("Monster")
 
         if(monster != null) {
             requireActivity().window.statusBarColor = requireActivity().getColor(monster!!.color)
@@ -51,6 +52,7 @@ class MonsterDetailsFragment : Fragment() {
             adapter = MonsterTypeAdapter(typeListOfMonster(monster!!.types), 1)
 
             binding.backBtn.setOnClickListener {
+                snackBar?.dismiss()
                 requireActivity().supportFragmentManager.popBackStack()
             }
 
@@ -88,6 +90,7 @@ class MonsterDetailsFragment : Fragment() {
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
+                    snackBar?.dismiss()
                     requireActivity().supportFragmentManager.popBackStack()
                 }
             })
@@ -118,8 +121,8 @@ class MonsterDetailsFragment : Fragment() {
 
                 binding.apply {
                     speciesTv.text = monster?.species?.name
-                    heightTv.text = "${monster?.height} cm"
-                    weightTv.text = "${monster?.weight} kg"
+                    heightTv.text = "${monster?.height?.toFloat()?.div(10)} m"
+                    weightTv.text = "${monster?.weight?.toFloat()?.div(10)} kg"
                     abilityTv.text = monster?.abilities?.let { getPokeAbilities(it) }
 
 //                    habitatTv.text = species.habitat.name
@@ -129,18 +132,18 @@ class MonsterDetailsFragment : Fragment() {
                 }
 
             }catch (e:Exception){
-                Snackbar.make(requireView(), "Something went Wrong", Snackbar.LENGTH_INDEFINITE)
+                snackBar = Snackbar.make(requireView(), "Something went Wrong", Snackbar.LENGTH_INDEFINITE)
                     .setActionTextColor(android.graphics.Color.RED)
                     .setAction("Refresh") {
                         getSpeciesDetails(id)
                     }
-                    .show()
+                snackBar!!.show()
             }
         }
     }
 
     private fun getPokeAbilities(list:List<Ability>):String{
-        var s:String = ""
+        var s = ""
         repeat(list.size-2){
             s += "${list[it].ability.name}, "
         }

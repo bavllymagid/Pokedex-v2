@@ -124,6 +124,12 @@ class AllMonstersFragment : Fragment() , AllMonstersAdapter.OnMonsterSelected {
     private fun transferTo(fragment: Fragment) {
         requireActivity().supportFragmentManager.commit {
             addToBackStack("frag")
+            setCustomAnimations(
+                androidx.appcompat.R.anim.abc_slide_in_bottom,
+                androidx.appcompat.R.anim.abc_fade_out,
+                androidx.appcompat.R.anim.abc_fade_in,
+                androidx.appcompat.R.anim.abc_slide_out_bottom
+            )
             replace(R.id.nav_container, fragment)
         }
     }

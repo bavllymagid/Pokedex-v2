@@ -1,6 +1,9 @@
 package com.bvm.pokedex.di
 
 import android.content.Context
+import android.content.SharedPreferences
+import com.bvm.pokedex.data.local.LocalDataSource
+import com.bvm.pokedex.data.local.LocalDataSourceImpl
 import com.bvm.pokedex.data.remote.PokedexApi
 import com.bvm.pokedex.data.remote.RemoteDataSource
 import com.bvm.pokedex.data.remote.RemoteDataSourceImpl
@@ -49,7 +52,20 @@ class PokedexModule {
 
     @Singleton
     @Provides
-    fun provideRepository(remoteDataSource: RemoteDataSource):PokedexRepository =
-        PokedexRepositoryImpl(remoteDataSource)
+    fun provideLocalDataSource(sharedPreferences: SharedPreferences):LocalDataSource =
+        LocalDataSourceImpl(sharedPreferences)
+
+    @Singleton
+    @Provides
+    fun provideRepository(remoteDataSource: RemoteDataSource, localDataSource: LocalDataSource):PokedexRepository =
+        PokedexRepositoryImpl(remoteDataSource,localDataSource)
+
+    @Singleton
+    @Provides
+    fun provideSharedPreference(@ApplicationContext context: Context): SharedPreferences {
+        return context.getSharedPreferences("Monster", Context.MODE_PRIVATE)
+    }
+
+
 
 }

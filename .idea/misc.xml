@@ -7,10 +7,13 @@
         <entry key="..\:/Pokedex/app/src/main/res/drawable/background.xml" value="0.1705" />
         <entry key="..\:/Pokedex/app/src/main/res/drawable/grid.xml" value="0.1705" />
         <entry key="..\:/Pokedex/app/src/main/res/drawable/ic_baseline_keyboard_backspace_24.xml" value="0.1705" />
+        <entry key="..\:/Pokedex/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1845" />
+        <entry key="..\:/Pokedex/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1845" />
         <entry key="..\:/Pokedex/app/src/main/res/drawable/item_background.xml" value="0.1705" />
         <entry key="..\:/Pokedex/app/src/main/res/drawable/poke.xml" value="0.1005" />
         <entry key="..\:/Pokedex/app/src/main/res/drawable/pokebal.xml" value="0.1705" />
         <entry key="..\:/Pokedex/app/src/main/res/drawable/pokeball.xml" value="0.1705" />
+        <entry key="..\:/Pokedex/app/src/main/res/drawable/progress_icon.xml" value="0.1845" />
         <entry key="..\:/Pokedex/app/src/main/res/drawable/sl_favourite.xml" value="0.1705" />
         <entry key="..\:/Pokedex/app/src/main/res/layout/activity_main.xml" value="0.2164855072463768" />
         <entry key="..\:/Pokedex/app/src/main/res/layout/background.xml" value="0.19786324786324785" />
@@ -22,6 +25,8 @@
         <entry key="..\:/Pokedex/app/src/main/res/layout/monster_item.xml" value="0.2164855072463768" />
         <entry key="..\:/Pokedex/app/src/main/res/layout/type_item.xml" value="0.2164855072463768" />
         <entry key="..\:/Pokedex/app/src/main/res/layout/type_item_monster_details.xml" value="0.2164855072463768" />
+        <entry key="..\:/Pokedex/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1845" />
+        <entry key="..\:/Pokedex/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1845" />
       </map>
     </option>
   </component>

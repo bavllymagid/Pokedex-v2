@@ -8,4 +8,6 @@ interface PokedexRepository {
     suspend fun getPokemonData(offset:Int, limit:Int): PokemonModel?
     suspend fun getPokemonByName(name:String): MonsterDetailsModel?
     suspend fun getSpeciesByID(id:Int):PokeSpecies?
+    fun getLikeState(id:Int):Boolean
+    fun setLikeSate(id:Int,state:Boolean)
 }

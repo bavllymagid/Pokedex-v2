@@ -71,6 +71,11 @@ class MonsterDetailsFragment : Fragment() {
                     ) else it.toString()
                 }
 
+                likeBtn.setOnClickListener{
+                    pokemonViewModel.setLikeState(monster!!.id , likeBtn.isChecked)
+                }
+                likeBtn.isChecked = pokemonViewModel.getLikeState(monster!!.id)
+
                 val colorMatrix = ColorMatrix()
                 colorMatrix.setSaturation(1.7f)
                 val filter = ColorMatrixColorFilter(colorMatrix)

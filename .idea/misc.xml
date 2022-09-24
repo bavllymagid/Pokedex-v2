@@ -17,9 +17,10 @@
         <entry key="..\:/Pokedex/app/src/main/res/drawable/sl_favourite.xml" value="0.1705" />
         <entry key="..\:/Pokedex/app/src/main/res/layout/activity_main.xml" value="0.2164855072463768" />
         <entry key="..\:/Pokedex/app/src/main/res/layout/background.xml" value="0.19786324786324785" />
+        <entry key="..\:/Pokedex/app/src/main/res/layout/base_stats.xml" value="0.24114583333333334" />
         <entry key="..\:/Pokedex/app/src/main/res/layout/data_place_holder.xml" value="0.2164855072463768" />
         <entry key="..\:/Pokedex/app/src/main/res/layout/fragment_all_monsters.xml" value="0.2" />
-        <entry key="..\:/Pokedex/app/src/main/res/layout/fragment_monster_details.xml" value="0.2" />
+        <entry key="..\:/Pokedex/app/src/main/res/layout/fragment_monster_details.xml" value="0.23157894736842105" />
         <entry key="..\:/Pokedex/app/src/main/res/layout/fragment_scrolling.xml" value="0.2164855072463768" />
         <entry key="..\:/Pokedex/app/src/main/res/layout/fragment_start_up.xml" value="0.2164855072463768" />
         <entry key="..\:/Pokedex/app/src/main/res/layout/monster_item.xml" value="0.2164855072463768" />

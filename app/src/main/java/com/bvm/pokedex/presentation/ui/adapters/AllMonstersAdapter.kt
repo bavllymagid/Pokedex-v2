@@ -85,6 +85,7 @@ class AllMonstersAdapter(val context: Context, private val onMonsterSelected: On
         view.setCardBackgroundColor(getColor(context, item.color))
     }
 
+
     interface OnMonsterSelected {
         fun onMonsterClicked(item : MonsterDetailsModel,position: Int)
     }

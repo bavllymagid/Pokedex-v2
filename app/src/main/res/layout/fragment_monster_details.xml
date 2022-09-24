@@ -75,20 +75,37 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/type_rc">
 
-        <TextView
-            android:id="@+id/about"
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/selector"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:padding="10dp"
-            android:text="@string/about"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:layout_marginEnd="8dp"
+            android:background="@color/transparent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabIndicatorColor="@color/blue"
+            app:tabSelectedTextColor="@color/grey"
+            app:tabTextColor="@color/black">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/base_status" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/evolution" />
+
+        </com.google.android.material.tabs.TabLayout>
 
         <ProgressBar
             android:id="@+id/about_progress"
@@ -99,16 +116,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/about" />
+            app:layout_constraintTop_toBottomOf="@+id/selector" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/data_placer"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="8dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/about">
+            app:layout_constraintTop_toBottomOf="@+id/selector">
 
             <TextView
                 android:id="@+id/brief_tv"
@@ -142,7 +160,7 @@
                 android:id="@+id/species_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="64dp"
+                android:layout_marginStart="32dp"
                 android:text="@string/species"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -291,6 +309,245 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/base_stat"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selector">
+
+            <TextView
+                android:id="@+id/hp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="@string/hp"
+                android:textColor="@color/grey"
+                app:layout_constraintBottom_toTopOf="@+id/attack"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/hp_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hp"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/hp"
+                app:layout_constraintStart_toStartOf="@+id/atk_tv"
+                app:layout_constraintTop_toTopOf="@+id/hp" />
+
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/hp_indicator"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:max="100"
+                app:indicatorColor="@color/red"
+                app:layout_constraintBottom_toBottomOf="@+id/hp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/hp_tv"
+                app:layout_constraintTop_toTopOf="@+id/hp" />
+
+            <TextView
+                android:id="@+id/attack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/attack"
+                android:textColor="@color/grey"
+                app:layout_constraintBottom_toTopOf="@+id/defense"
+                app:layout_constraintStart_toStartOf="@+id/hp"
+                app:layout_constraintTop_toBottomOf="@+id/hp" />
+
+
+            <TextView
+                android:id="@+id/atk_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="@string/attack"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/attack"
+                app:layout_constraintStart_toEndOf="@+id/attack"
+                app:layout_constraintTop_toTopOf="@+id/attack" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/atk_indicator"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:max="100"
+                app:indicatorColor="@color/red"
+                app:layout_constraintBottom_toBottomOf="@+id/atk_tv"
+                app:layout_constraintEnd_toEndOf="@+id/hp_indicator"
+                app:layout_constraintStart_toStartOf="@+id/hp_indicator"
+                app:layout_constraintTop_toTopOf="@+id/atk_tv" />
+
+            <TextView
+                android:id="@+id/defense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/defense"
+                android:textColor="@color/grey"
+                app:layout_constraintBottom_toTopOf="@+id/sp_attack"
+                app:layout_constraintStart_toStartOf="@+id/attack"
+                app:layout_constraintTop_toBottomOf="@+id/attack" />
+
+            <TextView
+                android:id="@+id/def_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/defense"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/defense"
+                app:layout_constraintStart_toStartOf="@+id/atk_tv"
+                app:layout_constraintTop_toTopOf="@+id/defense" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/def_indicator"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:max="100"
+                app:indicatorColor="@color/red"
+                app:layout_constraintBottom_toBottomOf="@+id/def_tv"
+                app:layout_constraintEnd_toEndOf="@+id/atk_indicator"
+                app:layout_constraintStart_toStartOf="@+id/atk_indicator"
+                app:layout_constraintTop_toTopOf="@+id/def_tv" />
+
+            <TextView
+                android:id="@+id/sp_attack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sp_atk"
+                android:textColor="@color/grey"
+                app:layout_constraintBottom_toTopOf="@+id/sp_def"
+                app:layout_constraintStart_toStartOf="@+id/defense"
+                app:layout_constraintTop_toBottomOf="@+id/defense" />
+
+            <TextView
+                android:id="@+id/sp_attack_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sp_atk"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/sp_attack"
+                app:layout_constraintStart_toStartOf="@+id/def_tv"
+                app:layout_constraintTop_toTopOf="@+id/sp_attack" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/sp_atk_indicator"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:max="100"
+                app:indicatorColor="@color/red"
+                app:layout_constraintBottom_toBottomOf="@+id/sp_attack_tv"
+                app:layout_constraintEnd_toEndOf="@+id/def_indicator"
+                app:layout_constraintStart_toStartOf="@+id/def_indicator"
+                app:layout_constraintTop_toTopOf="@+id/sp_attack_tv" />
+
+            <TextView
+                android:id="@+id/sp_def"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sp_def"
+                android:textColor="@color/grey"
+                app:layout_constraintBottom_toTopOf="@+id/speed"
+                app:layout_constraintStart_toStartOf="@+id/sp_attack"
+                app:layout_constraintTop_toBottomOf="@+id/sp_attack" />
+
+            <TextView
+                android:id="@+id/sp_def_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sp_def"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/sp_def"
+                app:layout_constraintStart_toStartOf="@+id/sp_attack_tv"
+                app:layout_constraintTop_toTopOf="@+id/sp_def" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/sp_def_indicator"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:max="100"
+                app:indicatorColor="@color/red"
+                app:layout_constraintBottom_toBottomOf="@+id/sp_def_tv"
+                app:layout_constraintEnd_toEndOf="@+id/sp_atk_indicator"
+                app:layout_constraintStart_toStartOf="@+id/sp_atk_indicator"
+                app:layout_constraintTop_toTopOf="@+id/sp_def_tv" />
+
+            <TextView
+                android:id="@+id/speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/speed"
+                android:textColor="@color/grey"
+                app:layout_constraintBottom_toTopOf="@+id/total"
+                app:layout_constraintStart_toStartOf="@+id/sp_def"
+                app:layout_constraintTop_toBottomOf="@+id/sp_def" />
+
+            <TextView
+                android:id="@+id/speed_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/speed"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/speed"
+                app:layout_constraintStart_toStartOf="@+id/sp_def_tv"
+                app:layout_constraintTop_toTopOf="@+id/speed" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/speed_indicator"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:max="100"
+                app:indicatorColor="@color/red"
+                app:layout_constraintBottom_toBottomOf="@+id/speed_tv"
+                app:layout_constraintEnd_toEndOf="@+id/sp_def_indicator"
+                app:layout_constraintStart_toStartOf="@+id/sp_def_indicator"
+                app:layout_constraintTop_toTopOf="@+id/speed_tv" />
+
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:text="@string/total"
+                android:textColor="@color/grey"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/speed"
+                app:layout_constraintTop_toBottomOf="@+id/speed" />
+
+            <TextView
+                android:id="@+id/total_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/total"
+                app:layout_constraintStart_toStartOf="@+id/speed_tv"
+                app:layout_constraintTop_toTopOf="@+id/total" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/monster_evolution"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selector"
+            app:spanCount="2"
+            android:visibility="gone"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -300,23 +557,38 @@
         android:id="@+id/monster_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:contentDescription="@string/poke_image"
         android:src="@drawable/poke"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/type_rc"
-        android:contentDescription="@string/poke_image" />
+        app:layout_constraintTop_toBottomOf="@+id/type_rc" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/type_rc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/monster_name"
         app:layout_constraintTop_toBottomOf="@+id/monster_name"
-        tools:listitem="@layout/type_item_monster_details" />
+        tools:listitem="@layout/type_item_monster_details"
+        android:padding="5dp"/>
+
+    <TextView
+        android:id="@+id/id_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/id"
+        android:textSize="30sp"
+        android:textColor="@color/semi_transparent"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/monster_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/monster_name" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ data class PokeSpecies(
     val capture_rate: Int,
     val color: Color,
     val egg_groups: List<EggGroup>,
+    val evolves_from_species: EvolvesFromSpecies,
     val flavor_text_entries: List<FlavorTextEntry>,
     val gender_rate: Int,
     val generation: Generation,

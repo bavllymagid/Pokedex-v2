@@ -1,6 +1,5 @@
 package com.bvm.pokedex.presentation.ui.fragments
 
-import android.app.ProgressDialog.show
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,9 +9,6 @@ import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import com.bvm.pokedex.R
 import com.bvm.pokedex.databinding.FragmentStartUpBinding
-import com.bvm.pokedex.domain.models.Color
-import com.bvm.pokedex.domain.models.MonsterDetailsModel
-import com.bvm.pokedex.domain.models.Pokemon
 import com.bvm.pokedex.domain.models.RequestPaginate
 import com.bvm.pokedex.presentation.viewmodels.PokedexViewModel
 import com.google.android.material.snackbar.Snackbar

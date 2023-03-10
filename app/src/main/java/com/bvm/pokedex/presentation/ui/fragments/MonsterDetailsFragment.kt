@@ -12,6 +12,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import com.bvm.pokedex.R
 import com.bvm.pokedex.databinding.FragmentMonsterDetailsBinding
@@ -299,7 +300,24 @@ class MonsterDetailsFragment : Fragment(), AllMonstersAdapter.OnMonsterSelected 
     }
 
     override fun onMonsterClicked(item: MonsterDetailsModel, position: Int) {
+        val fragment = MonsterDetailsFragment()
+        val bundle = Bundle()
+        bundle.putParcelable("Monster", item)
+        fragment.arguments = bundle
+        transferTo(fragment)
+    }
 
+    private fun transferTo(fragment: Fragment) {
+        requireActivity().supportFragmentManager.commit {
+            addToBackStack("frag")
+            setCustomAnimations(
+                androidx.appcompat.R.anim.abc_slide_in_bottom,
+                androidx.appcompat.R.anim.abc_fade_out,
+                androidx.appcompat.R.anim.abc_fade_in,
+                androidx.appcompat.R.anim.abc_slide_out_bottom
+            )
+            replace(R.id.nav_container, fragment)
+        }
     }
 
 }

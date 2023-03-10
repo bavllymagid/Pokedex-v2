@@ -4,13 +4,14 @@ import android.annotation.SuppressLint
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bvm.pokedex.R
 import com.bvm.pokedex.databinding.FragmentMonsterDetailsBinding
@@ -98,11 +99,14 @@ class MonsterDetailsFragment : Fragment(), AllMonstersAdapter.OnMonsterSelected 
             }
         }
 
+        binding.selector.isEnabled = false
+
 
         binding.selector.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when(tab?.position){
                     0 -> {
+                        binding.selector.isEnabled = false
                         binding.dataPlacer.visibility = View.VISIBLE
                         binding.baseStat.visibility = View.GONE
                         binding.monsterEvolution.visibility = View.GONE
@@ -117,6 +121,7 @@ class MonsterDetailsFragment : Fragment(), AllMonstersAdapter.OnMonsterSelected 
                     2 -> {
                         binding.dataPlacer.visibility = View.GONE
                         binding.baseStat.visibility = View.GONE
+                        binding.selector.isEnabled = false
                         getEvolutionList()
                     }
                 }
@@ -171,7 +176,7 @@ class MonsterDetailsFragment : Fragment(), AllMonstersAdapter.OnMonsterSelected 
                     abilityTv.text = monster?.abilities?.let { getPokeAbilities(it) }
                     briefTv.text = species?.flavor_text_entries?.let { getFlavourText(it) }
                 }
-
+                binding.selector.isEnabled = true
             }catch (e:Exception){
                 snackBar = Snackbar.make(requireView(), "Something went Wrong", Snackbar.LENGTH_INDEFINITE)
                     .setActionTextColor(android.graphics.Color.RED)
@@ -274,6 +279,7 @@ class MonsterDetailsFragment : Fragment(), AllMonstersAdapter.OnMonsterSelected 
                     evolutionAdapter.submitList(listOf(mons))
                 binding.aboutProgress.visibility = View.GONE
                 binding.monsterEvolution.visibility = View.VISIBLE
+                binding.selector.isEnabled = true
 
             } catch (e: Exception) {
                 snackBar =

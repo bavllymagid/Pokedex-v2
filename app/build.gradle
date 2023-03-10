@@ -117,6 +117,9 @@ dependencies {
 
     //shimmer effect
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    //fading effect
+    implementation 'com.github.bosphere.android-fadingedgelayout:fadingedgelayout:1.0.0'
 }
 
 kapt {

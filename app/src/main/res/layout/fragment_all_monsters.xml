@@ -92,7 +92,9 @@
                     app:layout_constraintBottom_toTopOf="@+id/monster_progress"
                     app:layout_constraintTop_toTopOf="parent"
                     app:spanCount="2"
-                    android:overScrollMode="never"/>
+                    android:requiresFadingEdge="vertical"
+                    android:fadingEdgeLength="20dp"
+                    />
 
                 <com.google.android.material.progressindicator.LinearProgressIndicator
                     android:id="@+id/monster_progress"

@@ -16,7 +16,7 @@ Pokedex is a beautiful pokemon dictionary for those who loves pokemon and want t
 ## Screenshots
 
 
-| Home Screen | Pokemon Details | Pokemon Evolution | Pokemon Stats |
+| Pokemons Screen | Pokemon Details | Pokemon Evolution | Pokemon Stats |
 | :---: | :---: | :---: | :---: |
 | <img src="pics\Screenshot_2023-03-28-02-44-32-61_6b44c2a917ddd9133d5e03637c86926b.jpg"/> | <img src="pics\Screenshot_2023-03-28-02-44-50-86_6b44c2a917ddd9133d5e03637c86926b.jpg"/> | <img src="pics\Screenshot_2023-03-28-02-45-11-01_6b44c2a917ddd9133d5e03637c86926b.jpg"/> | <img src="pics\Screenshot_2023-03-28-03-47-42-11_6b44c2a917ddd9133d5e03637c86926b.jpg"/> |
 
